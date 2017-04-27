@@ -28,6 +28,9 @@ Strophe.addConnectionPlugin('chatstates',
 
 	_notificationReceived: function(message)
 	{
+		if ($(message).find('error').length > 0)
+			return true;
+		
 		var composing = $(message).find('composing'),
 		paused = $(message).find('paused'),
 		active = $(message).find('active'),
