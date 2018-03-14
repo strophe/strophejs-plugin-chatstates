@@ -69,6 +69,16 @@ Strophe.addConnectionPlugin('chatstates',
 		this._sendNotification(jid, type, 'paused');
 	},
 
+	sendInactive: function(jid, type)
+	{
+		this._sendNotification(jid, type, 'inactive');
+	},
+
+	sendGone: function(jid, type)
+	{
+		this._sendNotification(jid, type, 'gone');
+	}
+
 	_sendNotification: function(jid, type, notification)
 	{
 		if (!type) type = 'chat';
