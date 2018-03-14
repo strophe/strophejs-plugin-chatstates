@@ -89,7 +89,7 @@ Strophe.addConnectionPlugin('chatstates',
 	sendGone: function(jid, type)
 	{
 		this._sendNotification(jid, type, 'gone');
-	}
+	},
 
 	_sendNotification: function(jid, type, notification)
 	{
