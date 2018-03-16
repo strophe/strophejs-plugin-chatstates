@@ -34,6 +34,8 @@ Strophe.addConnectionPlugin('chatstates',
 		var composing = $(message).find('composing'),
 		paused = $(message).find('paused'),
 		active = $(message).find('active'),
+		inactive = $(message).find('inactive'),
+		gone = $(message).find('gone'),
 		jid = $(message).attr('from');
 
 		if (composing.length > 0)
@@ -49,6 +51,16 @@ Strophe.addConnectionPlugin('chatstates',
 		if (active.length > 0)
 		{
 			$(document).trigger('active.chatstates', jid);
+		}
+
+		if (inactive.length > 0)
+		{
+			$(document).trigger('inactive.chatstates', jid);
+		}
+
+		if (gone.length > 0)
+		{
+			$(document).trigger('gone.chatstates', jid);
 		}
 
 		return true;
@@ -67,6 +79,16 @@ Strophe.addConnectionPlugin('chatstates',
 	sendPaused: function(jid, type)
 	{
 		this._sendNotification(jid, type, 'paused');
+	},
+
+	sendInactive: function(jid, type)
+	{
+		this._sendNotification(jid, type, 'inactive');
+	},
+
+	sendGone: function(jid, type)
+	{
+		this._sendNotification(jid, type, 'gone');
 	},
 
 	_sendNotification: function(jid, type, notification)
