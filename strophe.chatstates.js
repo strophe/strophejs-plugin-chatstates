@@ -36,6 +36,9 @@ Strophe.addConnectionPlugin('chatstates',
 		active = $(message).find('active'),
 		inactive = $(message).find('inactive'),
 		gone = $(message).find('gone'),
+		displayed = $(message).find('displayed'),
+    		received = $(message).find('received'),
+    		unread = $(message).find('unread'),
 		jid = $(message).attr('from');
 
 		if (composing.length > 0)
@@ -62,6 +65,21 @@ Strophe.addConnectionPlugin('chatstates',
 		{
 			$(document).trigger('gone.chatstates', jid);
 		}
+		
+		if (displayed.length > 0)
+		{
+      			$(document).trigger('displayed.chatstates', jid);
+    		}
+
+		if (received.length > 0)
+		{
+			$(document).trigger('received.chatstates', jid);
+    		}
+
+    		if (unread.length > 0)
+    		{
+      			$(document).trigger('unread.chatstates', jid);
+    		}
 
 		return true;
 	},
@@ -90,6 +108,21 @@ Strophe.addConnectionPlugin('chatstates',
 	{
 		this._sendNotification(jid, type, 'gone');
 	},
+	
+	sendDisplayed: function(jid, type)
+	{
+		this._sendNotification(jid, type, 'displayed');
+	},
+  
+  	sendReceived: function(jid, type)
+	{
+		this._sendNotification(jid, type, 'received');
+	},
+
+  	sendUnRead: function(jid, type)
+  	{
+    		this._sendNotification(jid, type, 'unread');
+  	},
 
 	_sendNotification: function(jid, type, notification)
 	{
